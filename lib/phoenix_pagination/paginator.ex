@@ -13,6 +13,7 @@ defmodule Phoenix.Pagination.Paginator do
     page = paginator.page
     total_pages = paginator.total_pages
     params = build_params(paginator.params, opts[:params])
+
     page
     |> previous_page
     |> first_page(page, opts[:window], opts[:first])
@@ -20,7 +21,7 @@ defmodule Phoenix.Pagination.Paginator do
     |> next_page(page, total_pages)
     |> last_page(page, total_pages, opts[:window], opts[:last])
     |> Enum.map(fn {l, p} ->
-     {l, p, build_url(conn, Map.put(params, "page", p)), page == p}
+      {l, p, build_url(conn, Map.put(params, "page", p)), page == p}
     end)
   end
 
@@ -28,11 +29,13 @@ defmodule Phoenix.Pagination.Paginator do
   Generates a page list based on current window
   """
   def page_list(list, page, total, window, true) when is_integer(window) and window >= 1 do
-    page_list = left(page, total, window)..right(page, total, window)
-    |> Enum.map(fn n -> {n, n} end)
+    page_list =
+      left(page, total, window)..right(page, total, window)
+      |> Enum.map(fn n -> {n, n} end)
 
     list ++ page_list
   end
+
   def page_list(list, _page, _total, _window, _range), do: list
 
   def left(page, _total, window) when page - window <= 1, do: 1
@@ -44,34 +47,42 @@ defmodule Phoenix.Pagination.Paginator do
   def previous_page(page) when page > 1 do
     [{:previous, page - 1}]
   end
+
   def previous_page(_page), do: []
 
   def next_page(list, page, total) when page < total do
     list ++ [{:next, page + 1}]
   end
+
   def next_page(list, _page, _total), do: list
 
   def first_page(list, page, window, true) when page - window > 1 do
     [{:first, 1} | list]
   end
+
   def first_page(list, _page, _window, _included), do: list
 
   def last_page(list, page, total, window, true) when page + window < total do
     list ++ [{:last, total}]
   end
+
   def last_page(list, _page, _total, _window, _included), do: list
 
   def build_url(conn, nil), do: conn.request_path
+
   def build_url(conn, params) do
-    p = params
-    |> Map.delete("id")
-    |> Enum.filter(fn {k, _v} ->
-      key = case is_atom(k) do
-        true -> Atom.to_string(k)
-          _  -> k
-      end
-      !String.ends_with?(key, "_id")
-    end)
+    p =
+      params
+      |> Map.delete("id")
+      |> Enum.filter(fn {k, _v} ->
+        key =
+          case is_atom(k) do
+            true -> Atom.to_string(k)
+            _ -> k
+          end
+
+        !String.ends_with?(key, "_id")
+      end)
 
     "#{conn.request_path}?#{build_query(p)}"
   end
@@ -80,7 +91,7 @@ defmodule Phoenix.Pagination.Paginator do
   Constructs a query param from a keyword list
   """
   def build_query(params) do
-    params |> Query.encode
+    params |> Query.encode()
   end
 
   def build_params(params, params2) do
@@ -90,11 +101,12 @@ defmodule Phoenix.Pagination.Paginator do
   def normalize_keys(params) when is_map(params) do
     for {key, val} <- params, into: %{}, do: {to_string(key), val}
   end
+
   def normalize_keys(params), do: params
 
   def build_options(opts) do
     params = opts[:params] || %{}
-    opts   = Keyword.merge(opts, [params: params])
+    opts = Keyword.merge(opts, params: params)
     Keyword.merge(@default, opts)
   end
 end

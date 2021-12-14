@@ -1,4 +1,5 @@
 defmodule Phoenix.Pagination.Product do
+  @moduledoc false
   use Ecto.Schema
 
   schema "products" do

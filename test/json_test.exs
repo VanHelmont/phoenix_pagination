@@ -20,10 +20,9 @@ defmodule Phoenix.Pagination.JSONTest do
       %{label: "Last", url: "/products?category=25&page=16", page: 16, current: false}
     ]
 
-    data = PaginatorData.page_list
+    data = PaginatorData.page_list()
     output = Phoenix.Pagination.JSON.render_page_list(data)
 
     assert expected == output
   end
-
 end
