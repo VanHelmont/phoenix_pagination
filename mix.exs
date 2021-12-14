@@ -49,7 +49,7 @@ defmodule Phoenix.Pagination.Mixfile do
   defp deps do
     [
       {:phoenix_html, "~> 2.14"},
-      {:plug, "~> 1.11"},
+      {:plug, "~> 1.12"},
       {:ecto_sql, "~> 3.7"},
       # Test dependencies
       {:postgrex, ">= 0.0.0", only: [:test]},
