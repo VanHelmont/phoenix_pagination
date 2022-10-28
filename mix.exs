@@ -50,7 +50,7 @@ defmodule Phoenix.Pagination.Mixfile do
     [
       {:phoenix_html, "~> 3.1"},
       {:plug, "~> 1.12"},
-      {:ecto_sql, "~> 3.7"},
+      {:ecto_sql, "~> 3.9"},
       # Test dependencies
       {:postgrex, ">= 0.0.0", only: [:test]},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
