@@ -1,12 +1,12 @@
 defmodule Phoenix.Pagination.Mixfile do
   use Mix.Project
-  @version "1.0.0"
+  @version "1.0.1"
 
   def project do
     [
       app: :phoenix_pagination,
       version: @version,
-      elixir: "~> 1.11",
+      elixir: "~> 1.13",
       elixirc_paths: path(Mix.env()),
       package: package(),
       build_embedded: Mix.env() == :prod,
