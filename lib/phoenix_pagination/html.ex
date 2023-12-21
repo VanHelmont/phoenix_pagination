@@ -2,9 +2,7 @@ defmodule Phoenix.Pagination.HTML do
   @moduledoc """
   HTML helpers to render the pagination links in templates.
   """
-
-  use Phoenix.HTML
-
+  use PhoenixHTMLHelpers
   alias Phoenix.Pagination.Paginator
   import Paginator, only: [build_options: 1]
 

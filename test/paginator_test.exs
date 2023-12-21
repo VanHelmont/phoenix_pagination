@@ -35,7 +35,7 @@ defmodule Phoenix.Pagination.PaginatorTest do
     params = %{query: "foo", page: 2, per_page: 10, foo: [1, 2]}
     conn = %{request_path: "http://localhost:4000/products"}
 
-    expected = "http://localhost:4000/products?foo[]=1&foo[]=2&page=2&per_page=10&query=foo"
+    expected = "http://localhost:4000/products?foo[]=1&foo[]=2&query=foo&per_page=10&page=2"
     assert build_url(conn, params) == expected
   end
 

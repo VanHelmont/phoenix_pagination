@@ -1,5 +1,6 @@
 defmodule Phoenix.Pagination.JSONTest do
   use ExUnit.Case, async: true
+  alias Phoenix.Pagination.JSON
 
   test "renders a list of links in json format" do
     expected = [
@@ -21,7 +22,7 @@ defmodule Phoenix.Pagination.JSONTest do
     ]
 
     data = PaginatorData.page_list()
-    output = Phoenix.Pagination.JSON.render_page_list(data)
+    output = JSON.render_page_list(data)
 
     assert expected == output
   end

@@ -2,8 +2,7 @@ defmodule Phoenix.Pagination.Paginator do
   @moduledoc """
   Helpers to render the pagination links and more.
   """
-
-  use Phoenix.HTML
+  use PhoenixHTMLHelpers
   @default [window: 3, range: true, current_class: "is-current"]
 
   alias Plug.Conn.Query

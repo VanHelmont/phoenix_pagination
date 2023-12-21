@@ -18,7 +18,7 @@ defmodule Phoenix.Pagination.JSON do
   `paginate` helper takes keyword list of `options`.
     paginate(phoenix_pagination, window: 5, next_label: ">>", previous_label: "<<", first: true, last: true, first_label: "First", last_label: "Last")
   """
-  use Phoenix.HTML
+  use PhoenixHTMLHelpers
   import Phoenix.Pagination.Paginator, only: [build_options: 1]
   alias Phoenix.Pagination.Paginator
 

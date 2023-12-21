@@ -1,10 +1,11 @@
 defmodule Phoenix.PaginationTest do
   use ExUnit.Case
-  alias Phoenix.Pagination.Repo
+  alias Ecto.Adapters.SQL.Sandbox
   alias Phoenix.Pagination.Product
+  alias Phoenix.Pagination.Repo
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Phoenix.Pagination.Repo)
+    :ok = Sandbox.checkout(Phoenix.Pagination.Repo)
   end
 
   defp create_products do
