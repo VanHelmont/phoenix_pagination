@@ -53,7 +53,7 @@ defmodule Phoenix.Pagination do
     {get_items(repo, query, per_page, offset), phoenix_pagination}
   end
 
-  defp get_items(repo, query, nil, _), do: repo.all(query)
+  defp get_items(repo, query, 0, _), do: repo.all(query)
 
   defp get_items(repo, query, limit, offset) do
     query
